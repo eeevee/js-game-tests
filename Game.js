@@ -8,7 +8,8 @@ var Game = new function() {
 	this.initialize = function(context, imgData){
 		this.context = context;
 		this.imgData = imgData;
-		this.ship = new Ship(imgData);
+		this.ship = new Actors.Ship(imgData);
+		//this.ship = new Ship(imgData);
 		this.actors.push(this.ship);
 		window.addEventListener('keydown', this.keydownHandler, false);
 		window.addEventListener('keyup', this.keyupHandler, false);
