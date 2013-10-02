@@ -1,6 +1,4 @@
 var Game = new function() {
-	var FPS = 24;
-	var REFRESH_SCREEN_UPDATE = 1000/FPS;
 	this.WIDTH = 800;
 	this.HEIGHT = 600;
 	this.actors = [];
@@ -9,7 +7,6 @@ var Game = new function() {
 		this.context = context;
 		this.imgData = imgData;
 		this.ship = new Actors.Ship(imgData);
-		//this.ship = new Ship(imgData);
 		this.actors.push(this.ship);
 		window.addEventListener('keydown', this.keydownHandler, false);
 		window.addEventListener('keyup', this.keyupHandler, false);
