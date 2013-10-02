@@ -7,9 +7,6 @@ var Actors = {
 		this.y = 0;
 		this.rotation = 0;
 		this.acceleration = 1;
-		this.walk = function() {
-			console.log('walking');
-		}
 	},
 
 	Ship: function(img) {

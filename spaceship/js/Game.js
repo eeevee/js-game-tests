@@ -74,9 +74,37 @@ var Game = {
 		this.engine.clear(this.context);
 		this.ship.updatePosition();
 		this.verifyShipShot();
+		console.log(this.ship.x + ":" + this.ship.y);
+		var actorsToRemove = [];
 		for(var i = 0; i < this.actors.length; i++){
-			this.engine.drawActor(this.context, this.actors[i]);
+			var actor = this.actors[i];
+			if(actor instanceof Actors.Bullet) {
+				if(this.bulletReachScreenLimits(actor)) {
+					actorsToRemove.push(actor);
+					continue;
+				}
+			}
+			this.engine.drawActor(this.context, actor);
 		}
+		this.clearActors(actorsToRemove);
 		Utils.requestAnimationFrame(this.loop, this);
+	},
+
+	clearActors: function(actorsToRemove) {
+		if(actorsToRemove.length == 0) return;
+		var index = this.actors.indexOf(actorsToRemove[0]);
+		if(index == -1) return;
+		this.actors.splice(index, 1);
+		actorsToRemove.splice(0, 1);
+		if(actorsToRemove.length > 0) {
+			this.clearActors(actorsToRemove);
+		}
+	},
+
+	bulletReachScreenLimits: function(bullet) {
+		if(bullet.x < -this.WIDTH/2 || bullet.x > this.WIDTH/2 || bullet.y < -this.HEIGHT/2 || bullet.y > this.HEIGHT/2) {
+			return true;
+		}
+		return false;
 	}
 }
