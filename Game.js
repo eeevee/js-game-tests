@@ -13,33 +13,28 @@ var Game = new function() {
 		this.actors.push(this.ship);
 		window.addEventListener('keydown', this.keydownHandler, false);
 		window.addEventListener('keyup', this.keyupHandler, false);
-		Utils.setInterval(this.loop, this, REFRESH_SCREEN_UPDATE);
+		Utils.requestAnimationFrame(this.loop, this);
 	}
 
 	this.keydownHandler = function(e) {
 		switch(e.keyCode){
 			case KEY_CODES['left']:
-				//this.ship.rotation -= 5;
 				pressedKeys['left'] = true;
 				break;
 
 			case KEY_CODES['up']:
-				//this.ship.increaseAcceleration();
 				pressedKeys['up'] = true;
 				break;
 
 			case KEY_CODES['right']:
-				//this.ship.rotation += 5;
 				pressedKeys['right'] = true;
 				break;
 
 			case KEY_CODES['down']:
-				//this.ship.decreaseAcceleration();
 				pressedKeys['down'] = true;
 				break;
 
 			case KEY_CODES['space']:
-				//this.actors.push(this.ship.shot());
 				pressedKeys['space'] = true;
 				break;	
 		}
@@ -83,5 +78,6 @@ var Game = new function() {
 		for(var i = 0; i < this.actors.length; i++){
 			RenderEngine.drawActor(this.context, this.actors[i]);
 		}
+		Utils.requestAnimationFrame(this.loop, this);
 	}
 }
